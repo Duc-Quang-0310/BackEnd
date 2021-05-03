@@ -5,16 +5,16 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 app.use(cors());
-
+//import route
 require("dotenv/config");
+const productsRoute = require("./routes/products");
+const authRoute = require("./routes/authRoute/auth");
+const postRoute = require("./routes/authRoute/post");
+const updateUserInfoRoute = require("./routes/authRoute/updateUserInfo");
 
 // react _ nodejs + expressjs _ postman + mongodb
 // anytime use req---> use body-parser
 app.use(bodyParser.json());
-
-// import route
-const productsRoute = require("./routes/products");
-app.use("/products", productsRoute);
 
 //Routes
 app.get("/", (req, res) => {
@@ -24,11 +24,16 @@ app.get("/", (req, res) => {
 //connect to db
 mongoose.connect(
   process.env.MongoDB_Connection,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true },
   () => {
     console.log("Connected to MongoDB");
   }
 );
 
+app.use("/products", productsRoute);
+app.use("/api/user", authRoute);
+app.use("/api/posts", postRoute);
+app.use("/api/updateUserInfo", updateUserInfoRoute);
+
 //listening
-app.listen(5000);
+app.listen(5000, () => console.log("Lisntening to port 5000"));
