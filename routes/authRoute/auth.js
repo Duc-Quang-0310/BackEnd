@@ -82,8 +82,8 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: "computadora.fullservice@gmail.com",
-        pass: "DucQuang11a6",
+        user: "ducquangdz01@gmail.com",
+        pass: "Quang11a6",
       },
     });
     let mailOptions = {
