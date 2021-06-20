@@ -92,16 +92,16 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
     transporter.sendMail(mailOptions, (err, data) => {
       if (err) {
         console.log(err);
+        res.status(500).json({ err });
       } else {
         console.log("Email activate account has been send");
+        await user.save();
+        res.json({
+          success: true,
+          message:
+            "Thư kích hoạt tài khoản đã được gửi (bạn nhớ kiểm tra cả thư rác nhé 😚)",
+        });
       }
-    });
-    const savedUser = await user.save();
-
-    res.json({
-      success: true,
-      message:
-        "Thư kích hoạt tài khoản đã được gửi (bạn nhớ kiểm tra cả thư rác nhé 😚)",
     });
   } catch (error) {
     console.log(error);
