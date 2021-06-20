@@ -23,9 +23,11 @@ router.post("/", async (req, res) => {
     card: req.body.card,
     storage: req.body.storage,
     pin: req.body.pin,
+    connection: req.body.connection,
     weight: req.body.weight,
     window: req.body.window,
-    imageLink: req.body.imageLink,
+    review: req.body.review,
+    imgs: req.body.imgs,
     price: req.body.price,
   });
   try {
@@ -72,9 +74,11 @@ router.patch("/:ProductId", async (req, res) => {
           card: req.body.card,
           storage: req.body.storage,
           pin: req.body.pin,
+          connection: req.body.connection,
           weight: req.body.weight,
           window: req.body.window,
-          imageLink: req.body.imageLink,
+          review: req.body.review,
+          imgs: req.body.imgs,
           price: req.body.price,
         },
       }

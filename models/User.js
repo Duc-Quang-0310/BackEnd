@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    require: true,
     min: 6,
     max: 333,
   },
@@ -34,15 +35,24 @@ const UserSchema = new mongoose.Schema({
   },
   mobilePhone: {
     type: String,
+    default: "",
   },
   shipCity: {
     type: String,
+    default: "",
   },
   shipDistrict: {
     type: String,
+    default: "",
   },
   shipSubDistrict: {
     type: String,
+    default: "",
+  },
+  imageUrl: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dsykf3mo9/image/upload/v1619363046/ProductImage/icons8-male-user-100_jgukfa.png",
   },
   date: {
     type: Date,

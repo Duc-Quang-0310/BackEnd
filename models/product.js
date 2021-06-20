@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const productSchema = mongoose.Schema({
+const productSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
@@ -33,6 +33,10 @@ const productSchema = mongoose.Schema({
     type: String,
     require: true,
   },
+  connection: {
+    type: String,
+    require: true,
+  },
   weight: {
     type: String,
     require: true,
@@ -41,8 +45,12 @@ const productSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  imageLink: {
-    type: String,
+  review: {
+    type: Array,
+    require: true,
+  },
+  imgs: {
+    type: Array,
     require: true,
   },
   price: {

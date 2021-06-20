@@ -3,14 +3,14 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
+var port = process.env.PORT || 5000;
 app.use(cors());
 //import route
 require("dotenv/config");
 const productsRoute = require("./routes/products");
 const authRoute = require("./routes/authRoute/auth");
-const postRoute = require("./routes/authRoute/post");
 const updateUserInfoRoute = require("./routes/authRoute/updateUserInfo");
+const blogRoute = require("./routes/blog");
 
 // react _ nodejs + expressjs _ postman + mongodb
 // anytime use req---> use body-parser
@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 //Routes
 app.get("/", (req, res) => {
-  res.send(" We are on localhost::5000");
+  res.send(` We are listening on ${port}`);
 });
 
 //connect to db
@@ -31,9 +31,9 @@ mongoose.connect(
 );
 
 app.use("/products", productsRoute);
+app.use("/blogs", blogRoute);
 app.use("/api/user", authRoute);
-app.use("/api/posts", postRoute);
 app.use("/api/updateUserInfo", updateUserInfoRoute);
 
 //listening
-app.listen(5000, () => console.log("Lisntening to port 5000"));
+app.listen(5000, () => console.log(`Lisntening to port ${port}`));
