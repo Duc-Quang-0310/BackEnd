@@ -89,7 +89,7 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
       subject: `Active account  ${username} on Computadora`,
       html: ` <a href="http://localhost:3000/activateAccount/${AllInfomationInToken}">Bấm vào đây để bắt đẩu kích hoạt tài khoản tại Computadora và sử dụng</a>`,
     };
-    transporter.sendMail(mailOptions, (err, data) => {
+    transporter.sendMail(mailOptions, async (err, data) => {
       if (err) {
         console.log(err);
         res.status(500).json({ err });
