@@ -1,3 +1,4 @@
+require("dotenv/config");
 var cors = require("cors");
 const express = require("express");
 const app = express();
@@ -6,7 +7,6 @@ const bodyParser = require("body-parser");
 var port = process.env.PORT || 5000;
 app.use(cors());
 //import route
-require("dotenv/config");
 const productsRoute = require("./routes/products");
 const authRoute = require("./routes/authRoute/auth");
 const updateUserInfoRoute = require("./routes/authRoute/updateUserInfo");
