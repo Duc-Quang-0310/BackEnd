@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var port = process.env.PORT || 5000;
 app.use(cors());
+
 //import route
 const productsRoute = require("./routes/products");
 const authRoute = require("./routes/authRoute/auth");
@@ -36,4 +37,4 @@ app.use("/api/user", authRoute);
 app.use("/api/updateUserInfo", updateUserInfoRoute);
 
 //listening
-app.listen(5000, () => console.log(`Lisntening to port ${port}`));
+app.listen(port, () => console.log(`Lisntening to port ${port}`));
