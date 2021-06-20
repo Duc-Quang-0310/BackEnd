@@ -79,6 +79,7 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: "Gmail",
       host: "smtp.gmail.com",
+      port: 465,
       secure: true,
       auth: {
         user: "computadora.fullservice@gmail.com",
