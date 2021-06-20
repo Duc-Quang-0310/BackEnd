@@ -79,12 +79,12 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        user: process.env.ADMINEMAIL_SECRET,
-        pass: process.env.PASSWORDEMAIL_SECRET,
+        user: "computadora.fullservice@gmail.com",
+        pass: "DucQuang11a6",
       },
     });
     let mailOptions = {
-      from: process.env.ADMINEMAIL_SECRET,
+      from: "computadora.fullservice@gmail.com",
       to: email,
       subject: `Active account  ${username} on Computadora`,
       html: ` <a href="http://localhost:3000/activateAccount/${AllInfomationInToken}">Bấm vào đây để bắt đẩu kích hoạt tài khoản tại Computadora và sử dụng</a>`,
