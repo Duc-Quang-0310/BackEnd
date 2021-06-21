@@ -2,7 +2,7 @@ const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
-var nodemailer = require("nodemailer");
+let nodemailer = require("nodemailer");
 
 //REGISTER
 // router.post("/register", async (req, res) => {
@@ -79,8 +79,9 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: "Gmail",
       host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
+      port: 587,
+      ignoreTLS: false,
+      secure: false,
       auth: {
         user: "ducquangdz01@gmail.com",
         pass: "Quang11a6",
