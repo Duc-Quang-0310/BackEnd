@@ -91,7 +91,7 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
       from: "computadora",
       to: email,
       subject: `Active account  ${username} on Computadora`,
-      html: ` <a href="http://localhost:3000/activateAccount/${AllInfomationInToken}">Bấm vào đây để bắt đẩu kích hoạt tài khoản tại Computadora và sử dụng</a>`,
+      html: ` <a href="https://computadora-quang.netlify.app/activateAccount/${AllInfomationInToken}">Bấm vào đây để bắt đẩu kích hoạt tài khoản tại Computadora và sử dụng</a>`,
     };
     transporter.sendMail(mailOptions, async (err, data) => {
       if (err) {
@@ -262,7 +262,7 @@ router.post("/pwRecoverSendRequestToBackEnd", async (req, res) => {
       from: process.env.ADMINEMAIL_SECRET,
       to: email,
       subject: `Khôi phục lại mật khẩu cho tài khoản ${username} on Computadora`,
-      html: ` <a href="http://localhost:3000/confirmPasswordRecover/${AllInfomationInToken}"> Bấm vào đây để xác nhận rằng chính là BẠN đang muốn lấy lại mật khẩu</a>`,
+      html: ` <a href="https://computadora-quang.netlify.app/confirmPasswordRecover/${AllInfomationInToken}"> Bấm vào đây để xác nhận rằng chính là BẠN đang muốn lấy lại mật khẩu</a>`,
     };
     transporter.sendMail(mailOptions, (err, data) => {
       if (err) {
