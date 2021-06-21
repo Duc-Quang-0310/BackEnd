@@ -83,12 +83,12 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
       ignoreTLS: false,
       secure: false,
       auth: {
-        user: "ducquangdz01@gmail.com",
+        user: "computadora.quang@gmail.com",
         pass: "Quang11a6",
       },
     });
     let mailOptions = {
-      from: "computadora.fullservice@gmail.com",
+      from: "computadora",
       to: email,
       subject: `Active account  ${username} on Computadora`,
       html: ` <a href="http://localhost:3000/activateAccount/${AllInfomationInToken}">Bấm vào đây để bắt đẩu kích hoạt tài khoản tại Computadora và sử dụng</a>`,
