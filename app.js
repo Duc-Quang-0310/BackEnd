@@ -12,6 +12,7 @@ const productsRoute = require("./routes/products");
 const authRoute = require("./routes/authRoute/auth");
 const updateUserInfoRoute = require("./routes/authRoute/updateUserInfo");
 const blogRoute = require("./routes/blog");
+const receiptRoute = require("./routes/receipts");
 
 // react _ nodejs + expressjs _ postman + mongodb
 // anytime use req---> use body-parser
@@ -32,6 +33,7 @@ mongoose.connect(
 );
 
 app.use("/products", productsRoute);
+app.use("/receipts", receiptRoute);
 app.use("/blogs", blogRoute);
 app.use("/api/user", authRoute);
 app.use("/api/updateUserInfo", updateUserInfoRoute);
