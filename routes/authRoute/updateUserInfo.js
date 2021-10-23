@@ -64,9 +64,10 @@ router.put("/updatePassWord", async (req, res) => {
   const validPassword = await bcrypt.compare(password, user.password);
   console.log("validPassword from updatePassWord", validPassword);
   if (!validPassword)
-    return res
-      .status(400)
-      .send("Mật khẩu không đúng với tài khoản mời bạn nhập lại");
+    return res.status(400).json({
+      message: "Mật khẩu không đúng với tài khoản mời bạn nhập lại",
+      success: false,
+    });
   //encrypt
   const decryptPW = await bcrypt.genSalt(10); // generate random string and mix them
   const hashedPW = await bcrypt.hash(newPassword, decryptPW);

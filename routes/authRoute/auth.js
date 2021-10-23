@@ -40,11 +40,15 @@ router.post("/sendUserInfoToRegisterDB", async (req, res) => {
   const emailExist = await User.findOne({ email: req.body.email });
 
   if (usernameExist)
-    return res.status(400).send("Tên người dùng đã tồn tại rồi bạn ơi!");
+    return res.status(400).json({
+      message: "Tên người dùng đã tồn tại rồi bạn ơi!",
+      success: false,
+    });
   if (emailExist)
-    return res
-      .status(400)
-      .send("email này đã được dùng để đăng ký tài khoản khác rồi bạn ơi!");
+    return res.status(400).json({
+      message: "email này đã được dùng để đăng ký tài khoản khác rồi bạn ơi!",
+      success: true,
+    });
 
   //variablize
   console.log(req.body);
@@ -172,23 +176,32 @@ router.post("/login", async (req, res) => {
   console.log(username);
 
   // username exist proceed further step
-  if (!user) return res.status(400).send("Sai tài khoản hoặc mật khẩu nhé");
-  if (!user.isConfirmed)
+  if (!user)
     return res
       .status(400)
-      .send(
-        "Bạn hãy kiểm tra lại hòm thư điện tử, chúng mình đã gửi thư rồi bạn kích hoạt đi nhé <3"
-      );
+      .json({ message: "Sai tài khoản hoặc mật khẩu nhé", success: false });
+  if (!user.isConfirmed)
+    return res.status(400).json({
+      message:
+        "Bạn hãy kiểm tra lại hòm thư điện tử, chúng mình đã gửi thư rồi bạn kích hoạt đi nhé <3",
+      success: false,
+    });
   const validPass = await bcrypt.compare(password, user.password);
   if (!validPass) {
-    return res.status(400).send("Sai tài khoản hoặc mật khẩu nhé");
+    return res
+      .status(400)
+      .json({ message: "Sai tài khoản hoặc mật khẩu nhé", success: false });
   }
   try {
     //create token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     res.json({
-      token,
-      user,
+      success: true,
+      message: "Đăng nhập thành công",
+      data: {
+        token,
+        user,
+      },
     });
   } catch (error) {
     console.log(error);
@@ -231,14 +244,16 @@ router.post("/pwRecoverSendRequestToBackEnd", async (req, res) => {
   const password = req.body.password;
   const email = req.body.email;
   if (!usernameExist) {
-    res
-      .status(400)
-      .send("Tài khoản này không tồn tại vui lòng đăng ký bạn ei 🤭 ");
+    res.status(400).json({
+      message: "Tài khoản này không tồn tại vui lòng đăng ký bạn ei 🤭 ",
+      success: false,
+    });
   }
   if (usernameExist.email != email) {
-    res
-      .status(400)
-      .send("Email không được liên kết với tài khoản này nhé bạn 😓 ");
+    res.status(400).json({
+      message: "Email không được liên kết với tài khoản này nhé bạn 😓 ",
+      success: false,
+    });
   }
   const AllInfomationInToken = jwt.sign(
     {

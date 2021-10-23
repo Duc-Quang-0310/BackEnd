@@ -7,9 +7,9 @@ const blog = require("../models/blog");
 router.get("/", async (req, res) => {
   try {
     const blogs = await blog.find({});
-    res.json(blogs);
+    res.json({ data: blogs, success: true });
   } catch (error) {
-    res.json(error);
+    res.json({ data: "", success: false });
   }
 });
 
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
 router.get("/:BlogId", async (req, res) => {
   try {
     const Blog = await blog.findById(req.params.BlogId);
-    res.json(Blog);
+    res.json({ data: Blog, success: true });
   } catch (err) {
     res.json(err);
   }

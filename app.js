@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var port = process.env.PORT || 5000;
+var ip = require("ip");
 app.use(cors());
 
 //import route
@@ -31,6 +32,8 @@ mongoose.connect(
     console.log("Connected to MongoDB");
   }
 );
+
+console.log(ip.address());
 
 app.use("/products", productsRoute);
 app.use("/receipts", receiptRoute);

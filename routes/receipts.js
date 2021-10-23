@@ -5,9 +5,9 @@ const receipt = require("../models/receipt");
 router.get("/", async (req, res) => {
   try {
     const allReceipts = await receipt.find();
-    res.json(allReceipts);
+    res.json({ data: allReceipts, success: true });
   } catch (error) {
-    res.json({ message: error });
+    res.json({ error: error, success: false });
   }
 });
 
@@ -16,9 +16,9 @@ router.get("/:userID", async (req, res) => {
     const receipt_withUserId = await receipt.find({
       userID: req.params.userID,
     });
-    res.json(receipt_withUserId);
+    res.json({ data: receipt_withUserId, success: true });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ error: error, success: false });
   }
 });
 
@@ -38,9 +38,9 @@ router.post("/", async (req, res) => {
 
   try {
     const savedReceipt = await Receipt.save();
-    res.json(savedReceipt);
+    res.json({ data: savedReceipt, success: true });
   } catch (error) {
-    res.status(500).json({ message: error });
+    res.status(500).json({ error, success: false });
   }
 });
 

@@ -6,9 +6,9 @@ const product = require("../models/product");
 router.get("/", async (req, res) => {
   try {
     const products = await product.find();
-    res.json(products);
+    res.json({ data: products, success: true });
   } catch (err) {
-    res.json({ message: err });
+    res.json({ data: "", success: false });
   }
 });
 
@@ -42,9 +42,9 @@ router.post("/", async (req, res) => {
 router.get("/:ProductId", async (req, res) => {
   try {
     const Product = await product.findById(req.params.ProductId);
-    res.json(Product);
+    res.json({ data: Product, success: true });
   } catch (err) {
-    res.json({ message: err });
+    res.json({ data: "", success: false });
   }
 });
 
